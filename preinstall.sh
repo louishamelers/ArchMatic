@@ -51,20 +51,73 @@ swapon "${DISK}p2"
 mkfs.ext4 -L "ROOT" "${DISK}p3"
 
 # mount target
-mkdir /mnt
+# mkdir /mnt
 mount -t ext4 "${DISK}p3" /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}p1" /mnt/boot/
 
+echo "done"
 read -p "Press enter to continue"
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-pacstrap /mnt base base-devel linux linux-firmware vim nano sudo --noconfirm --needed
+pacstrap /mnt base base-devel linux linux-firmware vim sudo --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
+
+
+echo "done"
+read -p "Press enter to continue"
+
+echo "--------------------------------------"
+echo "-- Timezone, hw clock & locale      --"
+echo "--------------------------------------"
+
+ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+hwclock --systohc
+## Locales
+# edit /etc/locale.gen -> uncomment nl-NL...
+# locale-gen
+
+## Hostname
+# /etc/hostname -> 'Rollo'
+
+## Hosts
+# /etc/hosts -> add following lines:
+# 127.0.0.1     localhost
+# ::1           localhost
+# 127.0.1.1     Rollo.localdomain      Rollo
+
+
+echo "done"
+read -p "Press enter to continue"
+
+echo "--------------------------------------"
+echo "--      User management             --"
+echo "--------------------------------------"
+# root user
+echo "Enter password for root user: "
+passwd
+
+# louis user
+useradd -m louis
+echo "Enter password for louis: "
+passwd louis
+usermod -aG wheel,audio,video,optical,storage louis
+
+echo "done"
+read -p "Press enter to continue"
+
+# echo "--------------------------------------"
+# echo "--      Installing Sudo             --"
+# echo "--------------------------------------"
+
+# pacman -S sudo --noconfirm --needed
+
+# echo "done"
+# read -p "Press enter to continue"
 
 echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
@@ -77,17 +130,15 @@ initrd  /initramfs-linux.img
 options root=${DISK}1 rw
 EOF
 
+
+echo "done"
+read -p "Press enter to continue"
+
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
 pacman -S networkmanager dhclient --noconfirm --needed
 systemctl enable --now NetworkManager
-
-echo "--------------------------------------"
-echo "--      Set Password for Root       --"
-echo "--------------------------------------"
-echo "Enter password for root user: "
-passwd root
 
 exit
 umount -R /mnt
