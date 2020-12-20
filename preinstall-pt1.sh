@@ -52,10 +52,10 @@ mkfs.ext4 -L "ROOT" "${DISK}p3"
 
 # mount target
 # mkdir /mnt
-mount -t ext4 "${DISK}p3" /mnt
+yes | mount -t ext4 "${DISK}p3" /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
-mount -t vfat "${DISK}p1" /mnt/boot/ --noconfirm --needed
+mount -t vfat "${DISK}p1" /mnt/boot/
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
