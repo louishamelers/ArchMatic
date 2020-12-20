@@ -70,3 +70,6 @@ echo "--------------------------------------"
 wget https://raw.githubusercontent.com/louishamelers/ArchMatic/master/preinstall-pt2.sh -P /mnt
 arch-chroot /mnt sh preinstall-pt2.sh
 
+echo "--------------------------------------"
+echo "-- done, system ready...            --"
+echo "--------------------------------------"
