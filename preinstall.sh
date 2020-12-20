@@ -60,8 +60,8 @@ mount -t vfat "${DISK}p1" /mnt/boot/
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-# pacstrap /mnt base base-devel linux linux-firmware vim sudo --noconfirm --needed
-# genfstab -U /mnt >> /mnt/etc/fstab
+pacstrap /mnt base base-devel linux linux-firmware vim sudo --noconfirm --needed
+genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "--------------------------------------"
 echo "-- subfile...       --"
