@@ -52,6 +52,7 @@ mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
 
+read LEKKER
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
