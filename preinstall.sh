@@ -57,16 +57,16 @@ mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}p1" /mnt/boot/
 
-echo "done"
-read -p "Press enter to continue"
-
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-pacstrap /mnt base base-devel linux linux-firmware vim sudo --noconfirm --needed
-genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt
+# pacstrap /mnt base base-devel linux linux-firmware vim sudo --noconfirm --needed
+# genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "--------------------------------------"
-echo "--   SYSTEM READY FOR FIRST BOOT    --"
+echo "-- subfile...       --"
 echo "--------------------------------------"
+
+wget https://raw.githubusercontent.com/louishamelers/ArchMatic/master/preinstall.sh -P /mnt/boot
+arch-chroot /mnt/boot/preinstall-pt.sh
+
