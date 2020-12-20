@@ -68,5 +68,5 @@ echo "-- subfile...       --"
 echo "--------------------------------------"
 
 wget https://raw.githubusercontent.com/louishamelers/ArchMatic/master/preinstall-pt2.sh -P /mnt/boot
-arch-chroot /mnt/boot/preinstall-pt.sh
+arch-chroot /mnt/boot/preinstall-pt2.sh
 
