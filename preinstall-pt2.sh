@@ -28,7 +28,7 @@ echo "Enter password for root user: "
 passwd
 
 # make default user
-echo "Enter a username for ya boi: "
+echo "Enter a username for a standard user: "
 read USERNAME
 useradd -m -G wheel ${USERNAME}
 echo "Password for ${USERNAME}"
@@ -38,25 +38,24 @@ echo "--------------------------------------"
 echo "--      Installing stuff            --"
 echo "--------------------------------------"
 
-# install boot stuff
-pacman -S --noconfirm efibootmgr
-pacman -S --noconfirm dosfstools
-pacman -S --noconfirm os-prober
-pacman -S --noconfirm mtools
-
 # install sudo
 pacman -S --noconfirm sudo
 # configure sudo 
 sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
-# install grub
+# install grub & boot
 pacman -S --noconfirm grub
+pacman -S --noconfirm efibootmgr
+pacman -S --noconfirm dosfstools
+pacman -S --noconfirm os-prober
+pacman -S --noconfirm mtools
 # configure grub
-mount /dev/nvme0n1p1 /boot/efi
-grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
+mkdir /boot/EFI
+mount /dev/nvme0n1p1 /boot/EFI
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --efi-directory=/boot/EFI --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
-pacman -S --noconfirm networkmanager git
+pacman -S --noconfirm networkmanager
 systemctl enable NetworkManager
 
 # done
