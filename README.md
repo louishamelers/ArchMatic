@@ -20,6 +20,15 @@ sh preinstall.sh
 reboot
 ```
 
+### Set wifi & autoconnect
+
+```bash
+nmcli device wifi list
+nmcli device wifi connect <SSID> password <SSID_password>
+nmcli device
+nmcli device set IFNAME autoconnect yes
+```
+
 ### Arch Linux First Boot
 
 ```bash
