@@ -25,7 +25,7 @@ echo "--------------------------------------"
 
 # set root user password
 echo "Enter password for root user: "
-passwd
+passwd root
 
 # make default user
 echo "Enter a username for a standard user: "
