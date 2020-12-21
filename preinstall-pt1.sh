@@ -6,7 +6,7 @@
 #   /_/ \_\_| \__|_||_|_|  |_\__,_|\__|_\__|
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
-echo " lekker" 
+
 echo "-------------------------------------------------"
 echo "Sync clock etc"
 echo "-------------------------------------------------"
@@ -52,7 +52,7 @@ mkfs.ext4 -L "ROOT" "${DISK}p3"
 
 # mount target
 # mkdir /mnt
-yes | mount -t ext4 "${DISK}p3" /mnt
+mount -t ext4 "${DISK}p3" /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}p1" /mnt/boot/
