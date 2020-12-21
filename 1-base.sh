@@ -68,6 +68,10 @@ PKGS=(
     # --- Laptop
         'xf86-input-synaptics' 
         'synaptics'
+        'xf86-video-intel'
+        'xorg-twm'
+        'xorg-xclock'
+        'xterm'
 )
 
 for PKG in "${PKGS[@]}"; do
