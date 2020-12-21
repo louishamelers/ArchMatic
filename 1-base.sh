@@ -64,6 +64,10 @@ PKGS=(
         'gsfonts'               # Adobe Postscript replacement fonts
         'hplip'                 # HP Drivers
         'system-config-printer' # Printer setup  utility
+        
+    # --- Laptop
+        'xf86-input-synaptics' 
+        'synaptics'
 )
 
 for PKG in "${PKGS[@]}"; do
