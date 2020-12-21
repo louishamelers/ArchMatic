@@ -33,7 +33,7 @@ nmcli device set IFNAME autoconnect yes
 
 ```bash
 pacman -S --no-confirm pacman-contrib curl git
-git clone https://github.com/ChrisTitusTech/ArchMatic
+git clone https://github.com/louishamelers/ArchMatic
 cd ArchMatic
 ./0-setup.sh
 ./1-base.sh
