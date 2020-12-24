@@ -51,12 +51,12 @@ sudo sed -i 's|xserverauthfile=\$HOME/.serverauth.\$\$|xserverauthfile=\$XAUTHOR
 
 # ------------------------------------------------------------------------
 
-echo -e "\nConfiguring LTS Kernel as a secondary boot option"
+# echo -e "\nConfiguring LTS Kernel as a secondary boot option"
 
-sudo cp /boot/loader/entries/arch.conf /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|Arch Linux|Arch Linux LTS Kernel|g' /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|vmlinuz-linux|vmlinuz-linux-lts|g' /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|initramfs-linux.img|initramfs-linux-lts.img|g' /boot/loader/entries/arch-lts.conf
+# sudo cp /boot/loader/entries/arch.conf /boot/loader/entries/arch-lts.conf
+# sudo sed -i 's|Arch Linux|Arch Linux LTS Kernel|g' /boot/loader/entries/arch-lts.conf
+# sudo sed -i 's|vmlinuz-linux|vmlinuz-linux-lts|g' /boot/loader/entries/arch-lts.conf
+# sudo sed -i 's|initramfs-linux.img|initramfs-linux-lts.img|g' /boot/loader/entries/arch-lts.conf
 
 # ------------------------------------------------------------------------
 
@@ -69,28 +69,28 @@ EOF
 
 # ------------------------------------------------------------------------
 
-echo -e "\nDisabling buggy cursor inheritance"
+# echo -e "\nDisabling buggy cursor inheritance"
 
-# When you boot with multiple monitors the cursor can look huge. This fixes it.
-sudo cat <<EOF > /usr/share/icons/default/index.theme
-[Icon Theme]
-#Inherits=Theme
-EOF
-
-# ------------------------------------------------------------------------
-
-echo -e "\nIncreasing file watcher count"
-
-# This prevents a "too many files" error in Visual Studio Code
-echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf && sudo sysctl --system
+# # When you boot with multiple monitors the cursor can look huge. This fixes it.
+# sudo cat <<EOF > /usr/share/icons/default/index.theme
+# [Icon Theme]
+# #Inherits=Theme
+# EOF
 
 # ------------------------------------------------------------------------
 
-echo -e "\nDisabling Pulse .esd_auth module"
+# echo -e "\nIncreasing file watcher count"
 
-# Pulse audio loads the `esound-protocol` module, which best I can tell is rarely needed.
-# That module creates a file called `.esd_auth` in the home directory which I'd prefer to not be there. So...
-sudo sed -i 's|load-module module-esound-protocol-unix|#load-module module-esound-protocol-unix|g' /etc/pulse/default.pa
+# # This prevents a "too many files" error in Visual Studio Code
+# echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf && sudo sysctl --system
+
+# ------------------------------------------------------------------------
+
+# echo -e "\nDisabling Pulse .esd_auth module"
+
+# # Pulse audio loads the `esound-protocol` module, which best I can tell is rarely needed.
+# # That module creates a file called `.esd_auth` in the home directory which I'd prefer to not be there. So...
+# sudo sed -i 's|load-module module-esound-protocol-unix|#load-module module-esound-protocol-unix|g' /etc/pulse/default.pa
 
 # ------------------------------------------------------------------------
 
